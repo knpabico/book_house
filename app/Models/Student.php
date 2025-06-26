@@ -9,7 +9,8 @@ class Student extends Model
     protected $table = 'students';
 
     protected $fillable = [
-        'full_name',
+        'first_name',
+        'last_name',
         'email',
         'phone_number',
         'gender',

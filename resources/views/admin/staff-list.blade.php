@@ -11,7 +11,8 @@
             <thead class="table-light">
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Full Name</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone Number</th>
                     <th scope="col">Gender</th>
@@ -24,7 +25,8 @@
                 @foreach($staffs as $staff)
                     <tr>
                         <td>{{$staff->id}}</td>
-                        <td>{{$staff->full_name}}</td>
+                        <td>{{$student->first_name}}</td>
+                        <td>{{$student->last_name}}</td>
                         <td>{{$staff->email}}</td>
                         <td>{{$staff->phone_number}}</td>
                         <td>{{$staff->gender}}</td>

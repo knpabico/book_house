@@ -27,7 +27,8 @@ class StaffController extends Controller
         
         try {
             $data = $request->validate([
-                'full_name' => 'required|string|max:255',
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
                 'email' => 'required|email|unique:staff,email',
                 'password' => 'required|string|min:8',
                 'phone_number' => 'required|string|max:15|unique:staff,phone_number',
@@ -54,7 +55,8 @@ class StaffController extends Controller
     public function update_staff(Staff $staff, Request $request){
         try{
             $data = $request->validate([
-                'full_name' => 'required|string|max:255',
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
                 // 'email' => 'required|email|unique:staff,email',
                 // 'phone_number' => 'required|string|max:15|unique:staff,phone_number',
                 'gender' => 'required|in:Female,Male,Other',

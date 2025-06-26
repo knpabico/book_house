@@ -17,8 +17,12 @@
         <p class="lead mb-4">A simple and efficient book management system to organize your library, track borrowers, and streamline book lending.</p>
 
         <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-            <a href="{{ route('login') }}" class="btn btn-primary btn-lg px-4" style="background-color: #545454;">Login</a>
-            <a href="{{ route('register') }}" class="btn btn-outline-primary btn-lg px-4" style="background-color: #5271ff;" >Register</a>
+            <a href="{{ route('login') }}" class="btn btn-primary btn-lg px-4" style="background-color: #545454; border: 2px solid #545454;">Login</a>
+            <!-- <button class="px-4 py-2 text-[#545454] border-2 border-[#545454] rounded hover:bg-[#545454] hover:text-white transition">
+                Trial
+            </button> -->
+
+            <a href="{{ route('register') }}" class="btn btn-outline-primary btn-lg px-4" >Register</a>
         </div>
     </div>
 
