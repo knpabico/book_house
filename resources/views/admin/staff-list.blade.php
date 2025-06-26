@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container">
@@ -25,8 +25,8 @@
                 @foreach($staffs as $staff)
                     <tr>
                         <td>{{$staff->id}}</td>
-                        <td>{{$student->first_name}}</td>
-                        <td>{{$student->last_name}}</td>
+                        <td>{{$staff->first_name}}</td>
+                        <td>{{$staff->last_name}}</td>
                         <td>{{$staff->email}}</td>
                         <td>{{$staff->phone_number}}</td>
                         <td>{{$staff->gender}}</td>

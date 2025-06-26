@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Student;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -28,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/student/dashboard';
 
     /**
      * Create a new controller instance.
@@ -53,6 +54,10 @@ class RegisterController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone_number' => ['required', 'string', 'max:15', 'unique:students,phone_number'],
+            'gender' => ['required', 'in:Female,Male,Other'],
+            'age' => ['required', 'integer', 'min:1'],
+            'student_id' => ['required', 'string', 'size:9', 'unique:students,student_id'],
         ]);
     }
 
@@ -64,12 +69,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $student = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'role' => 'student', 
         ]);
+
+        Student::create([
+            'first_name' => $student->first_name,
+            'last_name' => $student->last_name,
+            'email' => $student->email,
+            'password' => $student->password,
+            'phone_number' => $data['phone_number'],
+            'gender' => $data['gender'],
+            'age' => $data['age'],
+            'student_id' => $data['student_id'],
+        ]);
+
+        return $student;
     }
 }
