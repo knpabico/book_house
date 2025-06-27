@@ -47,9 +47,8 @@
                 <li>
                     <h6 class="text-white">Manage</h6>
                     <ul class="list-unstyled ps-3">
-                        <li><a href="{{route('admin.dashboard')}}" class="text-white d-block">Book</a></li>
-                        <li><a href="{{route('admin.staff-list')}}" class="text-white d-block">Staff</a></li>
-                        <li><a href="{{route('admin.student-list')}}" class="text-white d-block">Student</a></li>
+                        <li><a href="{{route('staff.dashboard')}}" class="text-white d-block">Book</a></li>
+                        <li><a href="{{route('staff.student-list')}}" class="text-white d-block">Student</a></li>
                     </ul>
                 </li>
                 <li class="mt-3">

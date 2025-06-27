@@ -9,7 +9,7 @@ class AdminController extends Controller
 {
     ///dashboard
     public function index(){
-        $books = Book::all();
+        $books = Book::orderBy('id', 'asc')->paginate(10);
         return view('admin.dashboard', ['books' => $books]);
     }
 }

@@ -1,35 +1,38 @@
-@extends('layouts.app')
+@extends('layouts.student')
 
 @section('content')
-<div class="container">
-    <h1>Welcome Student!</h1>
-    <div class="px-1 pt-1">
-        <table class="table table-striped table-bordered" style="border: 2px solid black;">
-            <thead class="table-light">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Author</th>
-                    <th scope="col">ISBN</th>
-                    <th scope="col">Published Date</th>
-                    <th scope="col">Copies Available</th>
-                    <th scope="col">Description</th>
-                </tr>
+<div class="container bg-white p-4 mt-4 rounded shadow-sm">
 
-                @foreach($books as $book)
-                    <tr>
-                        <td>{{$book->id}}</td>
-                        <td>{{$book->title}}</td>
-                        <td>{{$book->author}}</td>
-                        <td>{{$book->isbn}}</td>
-                        <td>{{$book->published_date}}</td>
-                        <td>{{$book->copies_available}}</td>
-                        <td>{{$book->description}}</td>
-                        
-                    </tr>
-                @endforeach
-        </table>
+    <div class="row justify-content-center g-4">
+        @foreach($books as $book)
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                <div class="card h-100 shadow-sm border-0">
+                    <img src="{{ asset('images/book.jpg') }}" class="card-img-top" alt="Book Cover" style="height: 220px; object-fit: cover;">
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title mb-1">{{ $book->title }}</h6>
+                        <p class="text-muted small mb-1">by {{ $book->author }}</p>
+                        <p class="mb-2 small"><strong>ISBN:</strong> {{ $book->isbn }}</p>
+                        <p class="card-text small flex-grow-1">{{ Str::limit($book->description, 80) }}</p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <span class="badge {{ $book->status === 'Available' ? 'bg-success' : 'bg-danger' }}">
+                                {{ ucfirst($book->status) }}
+                            </span>
+                            @if($book->status === 'Available')
+                                <form method="POST" action="">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-primary px-2 py-0">
+                                        Borrow
+                                    </button>
+                                </form>
+                            @else
+                                <button class="btn btn-sm btn-secondary px-2 py-0" disabled>--</button>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
+
 </div>
 @endsection
-

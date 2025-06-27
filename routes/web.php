@@ -53,7 +53,7 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
     Route::get('/staff/edit-book/{book}', [BookController::class, 'staff_edit_book'])->name('staff.edit-book');
     Route::put('/staff/update-book/{book}', [BookController::class, 'staff_update_book'])->name('staff.update-book');
 
-    Route::get('/staff/student-list', [StudentController::class, 'student_list'])->name('staff.student-list');
+    Route::get('/staff/student-list', [StudentController::class, 'staff_student_list'])->name('staff.student-list');
 });
 
 Route::middleware(['auth', 'role:student'])->get('/student/dashboard', [BookController::class, 'student_view'])->name('student.dashboard');

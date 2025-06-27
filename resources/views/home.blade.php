@@ -36,7 +36,7 @@
             <img src="{{ asset('images/logo2.png') }}" alt="My Photo" style="width: 350px; height: auto; object-fit: cover; object-position: center;">
         </div>
 
-        <p class="lead mb-4">Lend your needed books today!</p>
+        <p class="lead mb-4">Borrow your needed books today!</p>
 
         <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
             <a href="{{ route('login') }}" class="btn btn-primary btn-lg px-4" style="background-color: #545454; border: 2px solid #545454;">Login</a>

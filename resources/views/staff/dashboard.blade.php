@@ -1,14 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.staff')
 
 @section('content')
-<div class="container">
-    <h1>Welcome Staff!</h1>
-    <div class="px-1 pt-1">
-        <form method="get" action="{{route('staff.student-list')}}">
-            <input type="submit" value="Student" />
-        </form>
-        <table class="table table-striped table-bordered" style="border: 2px solid black;">
-            <thead class="table-light">
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="mb-0">Manage Books</h3>
+</div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle">
+            <thead class="table-dark text-center">
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Title</th>
@@ -17,25 +16,31 @@
                     <th scope="col">Published Date</th>
                     <th scope="col">Copies Available</th>
                     <th scope="col">Description</th>
-                    <th scope="col" colspan="2">Actions</th>
+                    <th scope="col" colspan="2">Action</th>
                 </tr>
-
+            </thead>
+            <tbody>
                 @foreach($books as $book)
-                    <tr>
-                        <td>{{$book->id}}</td>
-                        <td>{{$book->title}}</td>
-                        <td>{{$book->author}}</td>
-                        <td>{{$book->isbn}}</td>
-                        <td>{{$book->published_date}}</td>
-                        <td>{{$book->copies_available}}</td>
-                        <td>{{$book->description}}</td>
-                        <td>
-                            <a href="{{route('staff.edit-book', ['book' => $book])}}">Edit</a>
-                        </td>
-                        
-                    </tr>
+                <tr>
+                    <td>{{ $book->id }}</td>
+                    <td>{{ $book->title }}</td>
+                    <td>{{ $book->author }}</td>
+                    <td>{{ $book->isbn }}</td>
+                    <td>{{ $book->published_date }}</td>
+                    <td>{{ $book->copies_available }}</td>
+                    <td>{{ $book->description }}</td>
+                    <td class="text-center">
+                        <a href="{{ route('staff.edit-book', ['book' => $book]) }}" class="btn btn-warning btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                </tr>
                 @endforeach
+            </tbody>
         </table>
+        <div class="mt-3 d-flex justify-content-center">
+            {{ $books->links('pagination::bootstrap-5') }}
+        </div>
+
     </div>
-</div>
 @endsection

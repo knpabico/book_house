@@ -10,7 +10,7 @@ class StaffController extends Controller
 {   
     //dashboard
     public function index(){
-        $books = Book::all();
+        $books = Book::orderBy('id', 'asc')->paginate(10);
         return view('staff.dashboard', ['books' => $books]);
     }
 
@@ -19,7 +19,7 @@ class StaffController extends Controller
     }
 
     public function staff_list(){
-        $staffs = Staff::all();
+        $staffs = Staff::orderBy('id', 'asc')->paginate(10);
         return view('admin.staff-list', ['staffs' => $staffs]);
     }
 

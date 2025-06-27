@@ -1,37 +1,58 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <h1>Edit a Product</h1>
-    <form method="post" action="{{route('admin.update-book', ['book' => $book])}}">
+<div class="container bg-white p-4 rounded shadow-sm">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">Edit Book</h1>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Back to List
+        </a>
+    </div>
+
+    <form method="post" action="{{ route('admin.update-book', ['book' => $book]) }}">
         @csrf
         @method('put')
-        <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" name="title" value="{{$book->title}}" required>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="title" class="form-label fw-semibold">Title</label>
+                <input type="text" class="form-control" id="title" name="title" value="{{ $book->title }}" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="author" class="form-label fw-semibold">Author</label>
+                <input type="text" class="form-control" id="author" name="author" value="{{ $book->author }}" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="isbn" class="form-label fw-semibold">ISBN</label>
+                <input type="text" class="form-control" id="isbn" name="isbn" value="{{ $book->isbn }}" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="published_date" class="form-label fw-semibold">Published Date</label>
+                <input type="date" class="form-control" id="published_date" name="published_date" value="{{ $book->published_date }}" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="copies_available" class="form-label fw-semibold">Copies Available</label>
+                <input type="number" class="form-control" id="copies_available" name="copies_available" value="{{ $book->copies_available }}" required>
+            </div>
+
+            <div class="col-12">
+                <label for="description" class="form-label fw-semibold">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3" required>{{ $book->description }}</textarea>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="author" class="form-label">Author</label>
-            <input type="text" class="form-control" id="author" name="author" value="{{$book->author}}" required>
+
+        <div class="mt-4 d-flex justify-content-end gap-2">
+            <button type="submit" class="btn btn-primary" style="background-color: #008344; border 1px solid #008344;">
+                <i class="fas fa-save me-1"></i> Save Changes
+            </button>
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-secondary">
+                Cancel
+            </a>
         </div>
-        <div class="mb-3">
-            <label for="isbn" class="form-label">ISBN</label>
-            <input type="text" class="form-control" id="isbn" name="isbn" value="{{$book->isbn}}" required>
-        </div>
-        <div class="mb-3">
-            <label for="published_date" class="form-label">Published Date</label>
-            <input type="date" class="form-control" id="published_date" name="published_date" value="{{$book->published_date}}" required>
-        </div>
-        <div class="mb-3">
-            <label for="copies_available" class="form-label">Copies Available</label>
-            <input type="number" class="form-control" id="copies_available" name="copies_available" value="{{$book->copies_available}}" required>
-        </div>
-        <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <input type="text" class="form-control" id="description" name="description" value="{{$book->description}}" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Save</button>
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Back to List</a>
     </form>
 </div>
 @endsection

@@ -1,14 +1,16 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <h1>List of Staffs</h1>
-    <div class="px-1 pt-1">
-        <form method="get" action="{{route('admin.create-staff')}}">
-            <input type="submit" value="Add Staff" />
-        </form>
-        <table class="table table-striped table-bordered" style="border: 2px solid black;">
-            <thead class="table-light">
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="mb-0">Manage Staffs</h3>
+    <a href="{{ route('admin.create-staff') }}" class="btn btn-success">
+        <i class="fas fa-plus me-1"></i> Add Staff
+    </a>
+</div>
+
+<div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle">
+            <thead class="table-dark text-center">
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">First Name</th>
@@ -21,33 +23,44 @@
                     <th scope="col">Status</th>
                     <th scope="col" colspan="2">Actions</th>
                 </tr>
-
+            </thead>
+            <tbody>
                 @foreach($staffs as $staff)
-                    <tr>
-                        <td>{{$staff->id}}</td>
-                        <td>{{$staff->first_name}}</td>
-                        <td>{{$staff->last_name}}</td>
-                        <td>{{$staff->email}}</td>
-                        <td>{{$staff->phone_number}}</td>
-                        <td>{{$staff->gender}}</td>
-                        <td>{{$staff->age}}</td>
-                        <td>{{$staff->position}}</td>
-                        <td>{{$staff->status}}</td>
-                        <td>
-                            <a href="{{route('admin.edit-staff', ['staff' => $staff])}}">Edit</a>
-                        </td>
-                        <td>
-                            <form method="post" action="{{route('admin.delete-staff', ['staff' => $staff])}}">
-                                @csrf
-                                @method('delete')
-                                <input type="submit" value="Delete" />
-                            </form>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{$staff->id}}</td>
+                    <td>{{$staff->first_name}}</td>
+                    <td>{{$staff->last_name}}</td>
+                    <td>{{$staff->email}}</td>
+                    <td>{{$staff->phone_number}}</td>
+                    <td>{{$staff->gender}}</td>
+                    <td>{{$staff->age}}</td>
+                    <td>{{$staff->position}}</td>
+                    <td>{{$staff->status}}</td>
+                    <td class="text-center">
+                        <a href="{{route('admin.edit-staff', ['staff' => $staff])}}" class="btn btn-warning btn-sm">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $staff->id }})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+
+                        <form id="delete-form-{{ $staff->id }}" method="post" action="{{ route('admin.delete-staff', ['staff' => $staff]) }}" class="d-none">
+                            @csrf
+                            @method('delete')
+                        </form>
+
+                    </td>
+                </tr>
                 @endforeach
+            </tbody>
         </table>
+        <div class="mt-3 d-flex justify-content-center">
+            {{ $staffs->links('pagination::bootstrap-5') }}
+        </div>
+
     </div>
-        
-</div>
+
 @endsection
 

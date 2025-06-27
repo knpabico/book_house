@@ -13,8 +13,13 @@ class StudentController extends Controller
     }
 
     public function student_list(){
-        $students = Student::all();
+        $students = Student::orderBy('id', 'asc')->paginate(10);
         return view('admin.student-list', ['students' => $students]);
+    }
+
+    public function staff_student_list(){
+        $students = Student::orderBy('id', 'asc')->paginate(10);
+        return view('staff.student-list', ['students' => $students]);
     }
 
     public function delete_student(Student $student){

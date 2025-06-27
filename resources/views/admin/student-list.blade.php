@@ -1,11 +1,13 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <h1>List of Students</h1>
-    <div class="px-1 pt-1">
-        <table class="table table-striped table-bordered" style="border: 2px solid black;">
-            <thead class="table-light">
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="mb-0">Manage Students</h3>
+</div>
+
+<div class="table-responsive">
+        <table class="table table-hover table-bordered align-middle">
+            <thead class="table-dark text-center">
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">First Name</th>
@@ -16,32 +18,41 @@
                     <th scope="col">Age</th>
                     <th scope="col">Student ID</th>
                     <th scope="col">Borrow Status</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">Action</th>
                 </tr>
-
+            </thead>
+            <tbody>
                 @foreach($students as $student)
-                    <tr>
-                        <td>{{$student->id}}</td>
-                        <td>{{$student->first_name}}</td>
-                        <td>{{$student->last_name}}</td>
-                        <td>{{$student->email}}</td>
-                        <td>{{$student->phone_number}}</td>
-                        <td>{{$student->gender}}</td>
-                        <td>{{$student->age}}</td>
-                        <td>{{$student->student_id}}</td>
-                        <td>{{$student->borrow_status}}</td>
-                        <td>
-                            <form method="post" action="{{route('admin.delete-student', ['student' => $student])}}">
-                                @csrf
-                                @method('delete')
-                                <input type="submit" value="Delete" />
-                            </form>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>{{$student->id}}</td>
+                    <td>{{$student->first_name}}</td>
+                    <td>{{$student->last_name}}</td>
+                    <td>{{$student->email}}</td>
+                    <td>{{$student->phone_number}}</td>
+                    <td>{{$student->gender}}</td>
+                    <td>{{$student->age}}</td>                        
+                    <td>{{$student->student_id}}</td>
+                    <td>{{$student->borrow_status}}</td>
+                    
+                    <td class="text-center">
+                        <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $student->id }})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+
+                        <form id="delete-form-{{ $student->id }}" method="post" action="{{ route('admin.delete-student', ['student' => $student]) }}" class="d-none">
+                            @csrf
+                            @method('delete')
+                        </form>
+
+                    </td>
+                </tr>
                 @endforeach
+            </tbody>
         </table>
+        <div class="mt-3 d-flex justify-content-center">
+            {{ $students->links('pagination::bootstrap-5') }}
+        </div>
+
     </div>
-        
-</div>
 @endsection
 
